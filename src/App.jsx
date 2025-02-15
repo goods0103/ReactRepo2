@@ -2,9 +2,9 @@ import { useState } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
+import data from './data.js';
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [shoes] = useState(data)
   return (
     <div className='App'>
       <Navbar bg="dark" data-bs-theme="dark">
@@ -18,25 +18,28 @@ function App() {
         </Container>
       </Navbar>
       <div className='main-bg'></div>
+      {/* 컴포넌트화하기  */}
       <Row>
-        <Col sm>
-          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="80%" />
-          <h4>상품명</h4>
-          <p>상품정보</p>
-        </Col>
-        <Col sm>
-          <img src="https://codingapple1.github.io/shop/shoes2.jpg" width="80%" />
-          <h4>상품명</h4>
-          <p>상품정보</p>
-        </Col>
-        <Col sm>
-          <img src="https://codingapple1.github.io/shop/shoes3.jpg" width="80%" />
-          <h4>상품명</h4>
-          <p>상품정보</p>
-        </Col>
+        {
+          shoes.map((a, i) => {
+            return (
+              <Col sm>
+                <ProductComp shoes={shoes[i]} let i={i + 1} />
+              </Col>
+            )
+          })
+        }
       </Row>
     </div>
   )
 }
-
+const ProductComp = (props) => {
+  return (
+    <>
+      <img src={"https://codingapple1.github.io/shop/shoes" + props.i + ".jpg"} width="80%" />
+      <h4>{props.shoes.title}</h4>
+      <p>{props.shoes.content}</p>
+    </>
+  )
+}
 export default App
