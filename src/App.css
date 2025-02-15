@@ -1,3 +1,9 @@
+.main-bg{
+  height: 300px;
+  background-image: url('./shop.jpg');
+  background-size: cover;
+  background-position: center;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
