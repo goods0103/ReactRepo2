@@ -4,28 +4,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import data from './data.js';
 import Detail from './Routes/Detail.jsx'
-import { Routes, Route, Link } from 'react-router-dom'
+import About from './Routes/Event.jsx'
+import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 function App() {
+  let navigate = useNavigate()
   const [shoes] = useState(data)
   return (
     <div className='App'>
+      <Navbar bg="dark" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+
       <Routes>
         <Route path="/" element={
           <>
-            <div>main
-              <Navbar bg="dark" data-bs-theme="dark">
-                <Container>
-                  <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
-                  <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#features">Features</Nav.Link>
-                    <Nav.Link href="#pricing">Pricing</Nav.Link>
-                  </Nav>
-                </Container>
-              </Navbar>
+            <div>
               <div className='main-bg'></div>
               <Link to="/detail">상세페이지</Link>
-              <Link to="/about">about</Link>
+              <Button variant="primary" onClick={() => { navigate("/event") }}>about</Button>
               <Row>
                 {
                   shoes.map((a, i) => {
@@ -39,8 +42,12 @@ function App() {
               </Row>
             </div>
           </>} />
-        <Route path="/detail" element={<Detail/>} />
-        <Route path="/about" element={<div>about</div>} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/event" element={<About></About>} >
+          <Route path="one" element={<div>첫번째 이벤트</div>} />
+          <Route path="two" element={<div>두번째 이벤트</div>} />
+        </Route>
+        <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>
   )
