@@ -8,7 +8,7 @@ import About from './Routes/Event.jsx'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 function App() {
   let navigate = useNavigate()
-  const [shoes] = useState(data)
+  const [shoes, setshoes] = useState(data)
   return (
     <div className='App'>
       <Navbar bg="dark" data-bs-theme="dark">
@@ -27,7 +27,7 @@ function App() {
           <>
             <div>
               <div className='main-bg'></div>
-              <Link to="/detail">상세페이지</Link>
+              <Link to="/detail/0">상세페이지</Link>
               <Button variant="primary" onClick={() => { navigate("/event") }}>about</Button>
               <Row>
                 {
@@ -41,8 +41,14 @@ function App() {
                 }
               </Row>
             </div>
+            <button onClick={()=> {
+              let copy = [...shoes];
+              copy.sort((a,b)=>{return b.id-a.id});
+              setshoes(copy);
+              console.log(copy);
+              }}>정렬버튼</button>
           </>} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail shoes={shoes}/>} />
         <Route path="/event" element={<About></About>} >
           <Route path="one" element={<div>첫번째 이벤트</div>} />
           <Route path="two" element={<div>두번째 이벤트</div>} />
