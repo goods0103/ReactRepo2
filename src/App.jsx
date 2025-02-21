@@ -5,7 +5,7 @@ import { Button, Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import data from './data.js';
 import Detail from './Routes/Detail.jsx'
 import About from './Routes/Event.jsx'
-import { Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 function App() {
   let navigate = useNavigate()
   const [shoes, setshoes] = useState(data)
