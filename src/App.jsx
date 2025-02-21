@@ -6,6 +6,17 @@ import data from './data.js';
 import Detail from './Routes/Detail.jsx'
 import About from './Routes/Event.jsx'
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import axios from 'axios'
+
+
+// 버튼을 누르면 서버에서 상품데이터 3개를 가져와서
+
+// 메인페이지에 상품카드 3개를 더 생성해봅시다.
+
+// (팁) 리액트에선 html을 3개 더 생성해주세요~라고 코드짜지 않는다고 했습니다.
+
+// state 조작하면 html 알아서 생성될걸요
+
 function App() {
   let navigate = useNavigate()
   const [shoes, setshoes] = useState(data)
@@ -24,7 +35,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={
-          <>
+          <> 
             <div>
               <div className='main-bg'></div>
               <Link to="/detail/0">상세페이지</Link>
@@ -47,6 +58,17 @@ function App() {
               setshoes(copy);
               console.log(copy);
               }}>정렬버튼</button>
+            <button onClick={() => {
+              axios.get('https://codingapple1.github.io/shop/data2.json').then((data)=>{
+                console.log(data)
+                let data2 = [...shoes]
+                setshoes([...data2, data])
+                console.log(shoes);
+              })
+              .catch(()=>{
+                console.log("err");
+              })
+            }}>데이터 가져오기</button>
           </>} />
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>} />
         <Route path="/event" element={<About></About>} >

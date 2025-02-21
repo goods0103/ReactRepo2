@@ -8,14 +8,6 @@ import { useParams } from "react-router-dom"
 //   padding : 10px;
 // `;
 
-{/* <input> 하나 만들고 거기에 유저가 숫자 말고 다른걸 입력하면
-
-"그러지마세요"라는 안내메세지를 출력해봅시다.
-
-굳이 그럴 필요는 없겠지만 오늘 배운 useEffect 써보는게 어떨까요.
-
-(팁) 모르는건 검색해봐야합니다. */}
-
 const Detail = (props) => {
     let {id} = useParams();
     let copy = props.shoes.find((v) => v.id == id)
