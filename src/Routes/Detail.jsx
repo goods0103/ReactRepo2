@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { Button, Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
-
 // import styled from "styled-components";
 
 // let YellowButton = styled.button`
@@ -16,6 +15,14 @@ const Detail = (props) => {
   let [time, setTime] = useState(true);
   let [num, setNum] = useState('');
   let [tab, setTab] = useState(0);
+  let [fade2, setFade2] = useState('')
+
+  useEffect(()=>{
+    setFade2('end')
+    return ()=>{
+      setFade2('')
+    }
+  },[])
 
   useEffect(() => {
     let a = setTimeout(() => { setTime(false) }, 2000);
@@ -32,7 +39,7 @@ const Detail = (props) => {
 
   return (
     <>
-
+    <div className={'container start ' + fade2}>
       <Nav variant="tabs" defaultActiveKey="link0">
         <Nav.Item>
           <Nav.Link eventKey="link0" onClick={() => { setTab(0) }}>버튼0</Nav.Link>
@@ -66,27 +73,25 @@ const Detail = (props) => {
           </div>
         </div>
       </div>
+      </div>
     </>
   )
 }
-let TabContent = (props) => {
-  {
-    if(props.tab==0){
-      return(
-        <div>내용0</div>
-      )
+let TabContent = ({tab}) => {
+  
+  let [fade, setFade] = useState('');
+  
+  useEffect(()=>{
+    setTimeout(()=>{setFade('end')}, 100)
+    return()=>{
+      setFade('')
     }
-    if(props.tab==1){
-      return(
-        <div>내용1</div>
-      )
-    }
-    if(props.tab==2){
-      return(
-        <div>내용2</div>
-      )
-    }
-  }
+  }, [tab])
+  return(
+    <div className={'start'+ fade} >
+      { [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab] }
+    </div>
+  )
 }
 
 let YellowBox = () => {
