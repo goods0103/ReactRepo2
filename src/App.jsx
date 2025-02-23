@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
@@ -20,6 +20,7 @@ import axios from 'axios'
 function App() {
   let navigate = useNavigate()
   const [shoes, setshoes] = useState(data)
+
   return (
     <div className='App'>
       <Navbar bg="dark" data-bs-theme="dark">
@@ -60,10 +61,10 @@ function App() {
               }}>정렬버튼</button>
             <button onClick={() => {
               axios.get('https://codingapple1.github.io/shop/data2.json').then((data)=>{
-                console.log(data)
-                let data2 = [...shoes]
-                setshoes([...data2, data])
-                console.log(shoes);
+                let copy = [...shoes]
+                copy = [...shoes, ...data.data];
+                setshoes(copy)
+                console.log(shoes); 
               })
               .catch(()=>{
                 console.log("err");
