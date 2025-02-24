@@ -5,6 +5,7 @@ import { Button, Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import data from './data.js';
 import Detail from './Routes/Detail.jsx'
 import About from './Routes/Event.jsx'
+import Cart from './Routes/Cart.jsx'
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import axios from 'axios'
 
@@ -72,6 +73,7 @@ function App() {
             }}>데이터 가져오기</button>
           </>} />
         <Route path="/detail/:id" element={<Detail shoes={shoes}/>} />
+        <Route path="/cart" element={<Cart></Cart>}/>
         <Route path="/event" element={<About></About>} >
           <Route path="one" element={<div>첫번째 이벤트</div>} />
           <Route path="two" element={<div>두번째 이벤트</div>} />
