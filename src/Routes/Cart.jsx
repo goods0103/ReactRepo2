@@ -1,18 +1,6 @@
 import { Table } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
-import { changeName } from '../store.js';
-
-// **오늘의 숙제 :**
-
-// 하단에 있는 데이터를 Redux store 안에 보관해둡시다.
-
-// 그리고 Cart.js 페이지에 가져와서 데이터바인딩해봅시다.
-
-// 데이터 갯수에 맞게 표 생성해달라고 반복문쓰는 것도 좋을듯요
-
-// **숙제용 장바구니 데이터**
-
-
+import { changeState , addAge } from '../store.js';
 
 const Cart = () => {
     let state = useSelector((state) => { return state })
@@ -38,6 +26,7 @@ const Cart = () => {
                                     <td>{state.cart[i].name}</td>
                                     <td>{state.cart[i].count}</td>
                                     <td>안녕</td>
+                                    <button>+</button>
                                 </tr>
 
                             )
@@ -47,9 +36,12 @@ const Cart = () => {
                 </tbody>
             </Table>
             <button onClick={()=>{
-                dispatch(changeName(state.cart))
-                console.log(state)
-            }}>state 이름 변경</button>
+                dispatch(changeState())
+            }}>id 변경</button>
+            <button onClick={()=>{
+                dispatch(addAge(10))
+                console.log(state.user)
+            }}>id 변경</button>
         </>
     )
 }

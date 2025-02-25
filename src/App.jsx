@@ -41,6 +41,7 @@ function App() {
             <div>
               <div className='main-bg'></div>
               <Link to="/detail/0">상세페이지</Link>
+              <Button variant="primary" onClick={() => { navigate("/cart") }}>Cart</Button>
               <Button variant="primary" onClick={() => { navigate("/event") }}>about</Button>
               <Row>
                 {
